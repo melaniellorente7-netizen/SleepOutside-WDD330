@@ -29,3 +29,11 @@ const urlParams = new URLSearchParams(queryString);
 const product = urlParams.get('product')
 
 }
+
+function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
+  const htmlStrings = list.map(template);
+  if(clear) {
+    parentElement.innerHMTL = "";
+  }
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
