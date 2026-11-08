@@ -13,7 +13,7 @@ export default class ProductDetails {
       throw new Error(`Product '${this.productId}' was not found.`);
     }
     this.renderProductDetails();
-    setClick('#addToCart', () => {console.log('Added'); this.addProductToCart()});
+    setClick('#addToCart', () => this.addProductToCart());
   }
 
   addProductToCart() {

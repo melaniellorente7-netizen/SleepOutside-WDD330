@@ -27,3 +27,18 @@ export function getParam(name) {
   const params = new URLSearchParams(window.location.search);
   return params.get(name);
 }
+
+// render a list of items into parentElement using a template function
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = 'afterbegin',
+  clear = false,
+) {
+  if (clear) {
+    parentElement.innerHTML = '';
+  }
+  const htmlStrings = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+}
