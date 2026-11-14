@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from './utils.mjs';
+import { getLocalStorage, setLocalStorage, updateCartCount } from './utils.mjs';
 
 export default class ProductDetails {
 
@@ -30,6 +30,7 @@ export default class ProductDetails {
       cartItems.push({ ...this.product, Quantity: 1 });
     }
     setLocalStorage('so-cart', cartItems);
+    updateCartCount();
   }
 
   renderProductDetails() {
@@ -43,7 +44,7 @@ function productDetailsTemplate(product) {
     product.NameWithoutBrand;
 
   const productImage = document.getElementById('productImage');
-  productImage.src = product.Image;
+  productImage.src = product.Images?.PrimaryLarge ?? product.Image;
   productImage.alt = product.Name;
 
   document.getElementById('productPrice').textContent =

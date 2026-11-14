@@ -2,8 +2,6 @@
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
-// or a more concise version if you are into that sort of thing:
-// export const qs = (selector, parent = document) => parent.querySelector(selector);
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
@@ -15,34 +13,38 @@ export function setLocalStorage(key, data) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
+  qs(selector).addEventListener('touchend', (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener("click", callback);
+  qs(selector).addEventListener('click', callback);
 }
 
 // get the product id from the query string
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get(param);
-  return product
+  return urlParams.get(param);
 }
 
-export function renderListWithTemplate(template, parentElement, list, position = "afterbegin", clear = false) {
+export function renderListWithTemplate(
+  template,
+  parentElement,
+  list,
+  position = 'afterbegin',
+  clear = false,
+) {
   const htmlStrings = list.map(template);
-  // if clear is true we need to clear out the contents of the parent.
   if (clear) {
-    parentElement.innerHTML = "";
+    parentElement.innerHTML = '';
   }
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
-  parentElement.innerHTML = template ?? ""
+  parentElement.innerHTML = template ?? '';
   if (callback) {
-    callback(data)
+    callback(data);
   }
 }
 
@@ -52,25 +54,30 @@ export async function loadTemplate(path) {
   return template;
 }
 
+export function updateCartCount() {
+  const badge = qs('.cart-count');
+  if (!badge) return;
+
+  const items = getLocalStorage('so-cart') || [];
+  const total = items.reduce((sum, item) => sum + (item.Quantity ?? 1), 0);
+
+  badge.textContent = total;
+  badge.hidden = total === 0;
+}
+
 export async function loadHeaderFooter() {
   const [header, footer] = await Promise.all([
     loadTemplate('/partials/header.html'),
-    loadTemplate('/partials/footer.html')
+    loadTemplate('/partials/footer.html'),
   ]);
-
- 
-  console.log('Loading Templates');
-  console.log('Header:', header); 
-  console.log('Footer:', footer);
 
   const headerElement = qs('#main-header');
   const footerElement = qs('#main-footer');
 
   if (headerElement) {
-    renderWithTemplate(header, headerElement);
+    renderWithTemplate(header, headerElement, null, updateCartCount);
   }
-
   if (footerElement) {
-    renderWithTemplate(footer, qs('#main-footer'))
+    renderWithTemplate(footer, footerElement);
   }
 }
