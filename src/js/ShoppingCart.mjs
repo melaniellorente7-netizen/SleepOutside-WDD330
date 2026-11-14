@@ -7,10 +7,11 @@ import {
 function cartItemTemplate(item) {
   const quantity = item.Quantity ?? 1;
   const lineTotal = (item.FinalPrice * quantity).toFixed(2);
+  const image = item.Images?.PrimaryMedium ?? item.Image;
   return `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${image}"
       alt="${item.Name}"
     />
   </a>
