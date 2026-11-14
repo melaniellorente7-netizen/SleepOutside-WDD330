@@ -54,6 +54,17 @@ export async function loadTemplate(path) {
   return template;
 }
 
+export function updateCartCount() {
+  const badge = qs('.cart-count');
+  if (!badge) return;
+
+  const items = getLocalStorage('so-cart') || [];
+  const total = items.reduce((sum, item) => sum + (item.Quantity ?? 1), 0);
+
+  badge.textContent = total;
+  badge.hidden = total === 0;
+}
+
 export async function loadHeaderFooter() {
   const [header, footer] = await Promise.all([
     loadTemplate('/partials/header.html'),
@@ -64,7 +75,7 @@ export async function loadHeaderFooter() {
   const footerElement = qs('#main-footer');
 
   if (headerElement) {
-    renderWithTemplate(header, headerElement);
+    renderWithTemplate(header, headerElement, null, updateCartCount);
   }
   if (footerElement) {
     renderWithTemplate(footer, footerElement);

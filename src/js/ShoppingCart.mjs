@@ -2,6 +2,7 @@ import {
   getLocalStorage,
   setLocalStorage,
   renderListWithTemplate,
+  updateCartCount,
 } from './utils.mjs';
 
 function cartItemTemplate(item) {
@@ -69,5 +70,6 @@ export default class ShoppingCart {
     }
     setLocalStorage(this.key, items);
     this.renderCart();
+    updateCartCount();
   }
 }
