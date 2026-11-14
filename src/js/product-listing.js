@@ -6,7 +6,7 @@ loadHeaderFooter();
 
 const category = getParam('category');
 const dataSource = new ProductData();
-const element = document.querySelector('.product-list'); //find the element where the products will appear. 
-const myList = new ProductList(category, dataSource, element); // creates product list. 
+const element = document.querySelector('.product-list'); 
+const myList = new ProductList(category, dataSource, element); 
 
-myList.init(); // Display products.
+myList.init(); 
