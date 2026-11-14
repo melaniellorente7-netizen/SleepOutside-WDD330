@@ -34,9 +34,13 @@ export default class ProductList {
   }
 
   renderTitle() {
+    const categoryLabel = formatCategoryTitle(this.category);
     const titleElement = document.querySelector('.products h2');
     if (titleElement) {
-      titleElement.textContent = `Top Products: ${formatCategoryTitle(this.category)}`;
+      titleElement.textContent = `Top Products: ${categoryLabel}`;
+    }
+    if (categoryLabel) {
+      document.title = `Sleep Outside | ${categoryLabel}`;
     }
   }
 
