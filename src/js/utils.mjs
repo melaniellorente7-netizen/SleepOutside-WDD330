@@ -1,3 +1,8 @@
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -88,4 +93,15 @@ export async function loadHeaderFooter() {
   if (footerElement) {
     renderWithTemplate(footer, footerElement);
   }
+}
+
+export function formatPrice(price) {
+  return formatter.format(price);
+}
+
+export function calculateTotalProductPrice(products) {
+  return products.reduce((accumulated, item) => {
+    const quantity = item.Quantity ?? 1;
+    return accumulated + item.FinalPrice * quantity;
+  }, 0);
 }
