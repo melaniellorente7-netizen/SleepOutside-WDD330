@@ -19,9 +19,8 @@ checkout.init();
 const form = document.forms.checkout;
 const zipInput = form.elements.zip;
 
-zipInput.addEventListener('input', () => {;
-  if(!zipInput.checkValidity()) return;
-  
+zipInput.addEventListener('input', () => {
+  if (!zipInput.checkValidity()) return;
   checkout.calculateOrderTotal();
 });
 
@@ -45,7 +44,7 @@ form.addEventListener('submit', async (event) => {
 
 /** Enable Mock for quick testing */
 
-/**
+// /**
 function mockForm() {
     const data = {
         fname: 'John',
@@ -69,4 +68,4 @@ function mockForm() {
 }
 
 mockForm();
-*/
+// */

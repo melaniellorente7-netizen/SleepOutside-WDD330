@@ -76,12 +76,15 @@ export default class CheckoutProcess {
     }
 
     async checkout(form) {
+        const items = this.list;
+        this.calculateOrderTotal();
+
         const order = formDataToJSON(form);
         order.orderDate = new Date().toISOString();
-        order.items = packageItems(this.list);
-        order.orderTotal = formatPrice(this.orderTotal);
-        order.shipping = formatPrice(this.shipping);
-        order.tax = formatPrice(this.tax);
+        order.items = packageItems(items);
+        order.orderTotal = this.orderTotal.toFixed(2);
+        order.shipping = this.shipping;
+        order.tax = this.tax.toFixed(2);
 
         const response = await this.externalServices.checkout(order);
         setLocalStorage(this.key, []);
