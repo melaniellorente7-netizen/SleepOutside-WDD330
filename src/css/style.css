@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -100,7 +100,7 @@ p {
 }
 
 button,
-a[role="button"] {
+a[role='button'] {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
@@ -372,7 +372,7 @@ footer {
   margin: 0;
 }
 
-a[role="button"].checkout-button {
+a[role='button'].checkout-button {
   text-decoration: none;
   margin: 0;
 
@@ -432,7 +432,6 @@ a[role="button"].checkout-button {
     }
   }
 }
-
 
 .order-summary {
   padding: 1rem;
