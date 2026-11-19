@@ -151,6 +151,14 @@ button {
   text-align: center;
   border-radius: 9999rem;
   box-sizing: border-box;
+  transition:
+    transform 0.2s ease-out,
+    background-color 0.2s ease-out;
+}
+
+.cart-count.pulse {
+  transform: scale(1.4);
+  background-color: var(--tertiary-color);
 }
 
 /* End cart icon styles */

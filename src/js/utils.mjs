@@ -61,8 +61,16 @@ export function updateCartCount() {
   const items = getLocalStorage('so-cart') || [];
   const total = items.reduce((sum, item) => sum + (item.Quantity ?? 1), 0);
 
+  const previous = Number(badge.textContent);
   badge.textContent = total;
   badge.hidden = total === 0;
+
+  if (total !== previous && total > 0) {
+    badge.classList.remove('pulse');
+    void badge.offsetWidth;
+    badge.classList.add('pulse');
+    setTimeout(() => badge.classList.remove('pulse'), 200);
+  }
 }
 
 export async function loadHeaderFooter() {
