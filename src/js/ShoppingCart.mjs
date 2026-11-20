@@ -3,6 +3,8 @@ import {
   setLocalStorage,
   renderListWithTemplate,
   updateCartCount,
+  formatPrice,
+  calculateTotalProductPrice
 } from './utils.mjs';
 
 function cartItemTemplate(item) {
@@ -49,12 +51,9 @@ export default class ShoppingCart {
     const items = this.getItems();
     const cartFooter = document.querySelector('.cart-footer');
     cartFooter.classList.toggle('hide', items.length === 0);
-    const total = items.reduce((accumulated, item)=> {
-      const quantity = item.Quantity ?? 1;
-      return accumulated + item.FinalPrice * quantity;
-    }, 0);
+    const total = calculateTotalProductPrice(items);
     const totalElement = document.querySelector('.cart-total');
-    totalElement.textContent = `Total: $${total.toFixed(2)}`;
+    totalElement.textContent = `Total: ${formatPrice(total)}`;
 
     renderListWithTemplate(
       cartItemTemplate,

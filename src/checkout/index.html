@@ -1,15 +1,10 @@
 <!doctype html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Sleep Outside | Checkout</title>
-
     <script src="../js/checkout.js" type="module"></script>
-
     <link rel="stylesheet" href="/css/style.css" />
   </head>
 
@@ -17,8 +12,107 @@
     <header id="main-header" class="divider"></header>
 
     <main class="divider">
-      <section class="products">
-        <h2>Review & Place your Order</h2>
+      <section class="checkout">
+        <h2>Checkout</h2>
+
+        <form name="checkout" class="checkout-form">
+          <section class="form-fields">
+            <fieldset>
+              <legend>Customer</legend>
+
+              <label>
+                First Name
+                <input type="text" name="fname" required />
+              </label>
+              <label>
+                Last Name
+                <input type="text" name="lname" required />
+              </label>
+            </fieldset>
+
+            <fieldset>
+              <legend>Shipping Address</legend>
+
+              <label>
+                Street
+                <input type="text" name="street" required />
+              </label>
+              <label>
+                City
+                <input type="text" name="city" required />
+              </label>
+              <label>
+                State
+                <input
+                  type="text"
+                  name="state"
+                  maxlength="2"
+                  pattern="[A-Za-z]{2}"
+                  title="Two-letter state code (e.g. ID)"
+                  required
+                />
+              </label>
+              <label>
+                Zip
+                <input
+                  type="text"
+                  name="zip"
+                  pattern="\d{5}"
+                  title="5-digit zip code"
+                  required
+                />
+              </label>
+            </fieldset>
+
+            <fieldset>
+              <legend>Payment</legend>
+
+              <label>
+                Credit Card Number
+                <input
+                  type="text"
+                  name="cardNumber"
+                  pattern="\d{13,19}"
+                  title="13 to 19 digits"
+                  required
+                />
+              </label>
+              <label>
+                Expiration (MM/YY)
+                <input
+                  type="text"
+                  name="expiration"
+                  pattern="\d{1,2}/\d{2}"
+                  title="Format: MM/YY"
+                  required
+                />
+              </label>
+              <label>
+                Security Code
+                <input
+                  type="text"
+                  name="code"
+                  pattern="\d{3,4}"
+                  title="3 or 4 digits"
+                  required
+                />
+              </label>
+            </fieldset>
+          </section>
+
+          <section>
+            <div class="order-summary">
+              <h3>Order Summary</h3>
+              <p>Subtotal: <span id="subtotal">0.00</span></p>
+              <p>Shipping Estimate: <span id="shipping">0.00</span></p>
+              <p>Tax: <span id="tax">0.00</span></p>
+              <p class="order-total">
+                Total: <span id="orderTotal">0.00</span>
+              </p>
+            </div>
+            <button type="submit" class="checkout-button">Checkout</button>
+          </section>
+        </form>
       </section>
     </main>
 

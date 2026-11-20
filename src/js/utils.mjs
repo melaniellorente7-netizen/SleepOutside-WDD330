@@ -1,3 +1,8 @@
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -61,8 +66,16 @@ export function updateCartCount() {
   const items = getLocalStorage('so-cart') || [];
   const total = items.reduce((sum, item) => sum + (item.Quantity ?? 1), 0);
 
+  const previous = Number(badge.textContent);
   badge.textContent = total;
   badge.hidden = total === 0;
+
+  if (total !== previous && total > 0) {
+    badge.classList.remove('pulse');
+    void badge.offsetWidth;
+    badge.classList.add('pulse');
+    setTimeout(() => badge.classList.remove('pulse'), 200);
+  }
 }
 
 export async function loadHeaderFooter() {
@@ -80,4 +93,15 @@ export async function loadHeaderFooter() {
   if (footerElement) {
     renderWithTemplate(footer, footerElement);
   }
+}
+
+export function formatPrice(price) {
+  return formatter.format(price);
+}
+
+export function calculateTotalProductPrice(products) {
+  return products.reduce((accumulated, item) => {
+    const quantity = item.Quantity ?? 1;
+    return accumulated + item.FinalPrice * quantity;
+  }, 0);
 }
