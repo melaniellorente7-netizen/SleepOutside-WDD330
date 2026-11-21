@@ -105,3 +105,29 @@ export function calculateTotalProductPrice(products) {
     return accumulated + item.FinalPrice * quantity;
   }, 0);
 }
+
+
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+
+  const messageText = document.createElement('p');
+  messageText.textContent = message;
+
+  const closeButton = document.createElement('button');
+  closeButton.type = 'button';
+  closeButton.textContent = 'X';
+
+  closeButton.addEventListener('click', () => {
+    alert.remove();
+  });
+
+  alert.append(messageText, closeButton);
+
+  const main = document.querySelector('main');
+  main.prepend(alert);
+
+  if (scroll) {
+    window.scrollTo(0, 0);
+  }
+}
