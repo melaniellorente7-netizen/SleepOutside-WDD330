@@ -34,8 +34,9 @@ form.addEventListener('submit', async (event) => {
     const response = await checkout.checkout(form);
     console.log('Order submitted:', response);
     updateCartCount();
-    alert('Order submitted successfully!');
+    
     window.location.href = '/';
+    
   } catch (error) {
     console.error('Checkout failed:', error);
     alert('Something went wrong. Please try again.');

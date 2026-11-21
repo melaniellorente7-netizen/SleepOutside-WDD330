@@ -1,4 +1,5 @@
-import { getLocalStorage, setLocalStorage, formatPrice, calculateTotalProductPrice, qs } from './utils.mjs';
+import { getLocalStorage, setLocalStorage, formatPrice, calculateTotalProductPrice, qs, alertMessage } from './utils.mjs';
+
 
 const TAX_RATE = 0.06;
 const FIRST_ITEM_SHIPPING = 10;
@@ -86,8 +87,26 @@ export default class CheckoutProcess {
         order.shipping = this.shipping;
         order.tax = this.tax.toFixed(2);
 
+        try{
         const response = await this.externalServices.checkout(order);
         setLocalStorage(this.key, []);
         return response;
+        }
+
+        catch (err) {
+        console.error('Checkout error:', err);
+
+        const details = err.message;
+
+        const messages = details && typeof details === 'object'
+            ? Object.values(details)
+            : [details || 'Unable to place your order.'];
+
+        messages.forEach((message) => {
+            alertMessage(message);
+        });
+
+        return null;
+    }
     }
 }
