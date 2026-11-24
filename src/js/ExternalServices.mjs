@@ -2,14 +2,18 @@ const baseURL = (import.meta.env.VITE_SERVER_URL || '').replace(/\/$/, '');
 
 async function convertToJson(res) {
   const jsonResponse = await res.json();
-  if (res.ok) {
-    return jsonResponse();
+
+  if (!res.ok) {
+    const message =
+      jsonResponse.message ||
+      jsonResponse.Message ||
+      `Request failed (${res.status})`;
+
+    throw new Error(message);
   }
-    throw{
-      name: 'serviceError',
-      message: 'jsonResponse',
-    } ;
-  }
+
+  return jsonResponse;
+}
 
 export default class ExternalServices {
   async getData(category) {

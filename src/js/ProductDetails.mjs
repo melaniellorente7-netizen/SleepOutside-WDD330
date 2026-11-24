@@ -30,7 +30,7 @@ export default class ProductDetails {
       cartItems.push({ ...this.product, Quantity: 1 });
     }
     setLocalStorage('so-cart', cartItems);
-    updateCartCount();
+    updateCartCount(true);
   }
 
   renderProductDetails() {
