@@ -32,11 +32,13 @@ form.addEventListener('submit', async (event) => {
   }
   try {
     const response = await checkout.checkout(form);
+
+    if (response === null) return;
+
     console.log('Order submitted:', response);
     updateCartCount();
-    
-    window.location.href = '/';
-    
+    window.location.href = '/checkout/success.html';
+
   } catch (error) {
     console.error('Checkout failed:', error);
     alert('Something went wrong. Please try again.');
@@ -45,7 +47,6 @@ form.addEventListener('submit', async (event) => {
 
 /** Enable Mock for quick testing */
 
-/**
 function mockForm() {
   const data = {
     fname: 'John',
@@ -69,4 +70,3 @@ function mockForm() {
 }
 
 mockForm();
-*/

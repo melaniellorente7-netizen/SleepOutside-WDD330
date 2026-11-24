@@ -278,7 +278,57 @@ a[role='button'] {
 .hide {
   display: none;
 }
+.success-page {
+  display: grid;
+  place-items: center;
+  min-height: 50vh;
+  padding: 2rem 1rem;
+}
 
+.success-card {
+  width: min(100%, 40rem);
+  margin: 2rem auto;
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: white;
+  border: 1px solid var(--light-grey);
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(48, 48, 48, 0.12);
+}
+
+.success-icon {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0 auto 1.25rem;
+  color: var(--secondary-color);
+  background-color: #eef4e2;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.success-card h2 {
+  color: var(--secondary-color);
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.success-card p {
+  margin: 0.75rem 0 1.5rem;
+}
+
+.success-card a[role='button'] {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
+
+.success-card a[role='button']:hover {
+  background-color: var(--tertiary-color);
+}
 .delete-btn {
   position: absolute;
   top: 0.25rem;
