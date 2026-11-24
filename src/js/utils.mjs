@@ -59,14 +59,14 @@ export async function loadTemplate(path) {
   return template;
 }
 
-export function updateCartCount() {
+export function updateCartCount(animateIcon = false) {
   const badge = qs('.cart-count');
   if (!badge) return;
 
   const items = getLocalStorage('so-cart') || [];
   const total = items.reduce((sum, item) => sum + (item.Quantity ?? 1), 0);
-
   const previous = Number(badge.textContent);
+
   badge.textContent = total;
   badge.hidden = total === 0;
 
@@ -75,6 +75,16 @@ export function updateCartCount() {
     void badge.offsetWidth;
     badge.classList.add('pulse');
     setTimeout(() => badge.classList.remove('pulse'), 200);
+  }
+
+  if (animateIcon && total > previous) {
+    const icon = qs('.cart svg');
+
+    if (icon) {
+      icon.classList.remove('cart-bounce');
+      void icon.offsetWidth;
+      icon.classList.add('cart-bounce');
+    }
   }
 }
 

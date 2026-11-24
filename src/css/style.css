@@ -509,3 +509,31 @@ a[role='button'].checkout-button {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
 }
+.cart svg.cart-bounce {
+  transform-origin: center;
+  animation: cart-bounce 550ms ease-in-out;
+}
+
+@keyframes cart-bounce {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+
+  30% {
+    transform: scale(1.2) rotate(-12deg);
+  }
+
+  60% {
+    transform: scale(1.15) rotate(10deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart svg.cart-bounce {
+    animation: none;
+  }
+}

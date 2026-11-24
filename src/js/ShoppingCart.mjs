@@ -112,7 +112,7 @@ export default class ShoppingCart {
     setLocalStorage(this.key, items);
 
     this.renderCart();
-    updateCartCount();
+    updateCartCount(amount > 0);
   }
 
   getItems() {
