@@ -15,18 +15,28 @@
       <section class="checkout">
         <h2>Checkout</h2>
 
-        <form name="checkout" class="checkout-form">
+        <form name="checkout" class="checkout-form" novalidate>
           <section class="form-fields">
             <fieldset>
               <legend>Customer</legend>
 
               <label>
                 First Name
-                <input type="text" name="fname" required />
+                <input
+                  type="text"
+                  name="fname"
+                  autocomplete="given-name"
+                  required
+                />
               </label>
               <label>
                 Last Name
-                <input type="text" name="lname" required />
+                <input
+                  type="text"
+                  name="lname"
+                  autocomplete="family-name"
+                  required
+                />
               </label>
             </fieldset>
 
@@ -35,20 +45,32 @@
 
               <label>
                 Street
-                <input type="text" name="street" required />
+                <input
+                  type="text"
+                  name="street"
+                  autocomplete="street-address"
+                  required
+                />
               </label>
               <label>
                 City
-                <input type="text" name="city" required />
+                <input
+                  type="text"
+                  name="city"
+                  autocomplete="address-level2"
+                  required
+                />
               </label>
               <label>
                 State
                 <input
                   type="text"
                   name="state"
+                  autocomplete="address-level1"
                   maxlength="2"
                   pattern="[A-Za-z]{2}"
                   title="Two-letter state code (e.g. ID)"
+                  placeholder="ID"
                   required
                 />
               </label>
@@ -57,8 +79,12 @@
                 <input
                   type="text"
                   name="zip"
+                  autocomplete="postal-code"
+                  inputmode="numeric"
                   pattern="\d{5}"
+                  maxlength="5"
                   title="5-digit zip code"
+                  placeholder="83440"
                   required
                 />
               </label>
@@ -72,8 +98,12 @@
                 <input
                   type="text"
                   name="cardNumber"
+                  autocomplete="cc-number"
+                  inputmode="numeric"
                   pattern="\d{13,19}"
-                  title="13 to 19 digits"
+                  maxlength="19"
+                  title="13 to 19 digits, no spaces"
+                  placeholder="1234123412341234"
                   required
                 />
               </label>
@@ -82,8 +112,12 @@
                 <input
                   type="text"
                   name="expiration"
+                  autocomplete="cc-exp"
+                  inputmode="numeric"
                   pattern="\d{1,2}/\d{2}"
+                  maxlength="5"
                   title="Format: MM/YY"
+                  placeholder="12/27"
                   required
                 />
               </label>
@@ -92,8 +126,12 @@
                 <input
                   type="text"
                   name="code"
+                  autocomplete="cc-csc"
+                  inputmode="numeric"
                   pattern="\d{3,4}"
+                  maxlength="4"
                   title="3 or 4 digits"
+                  placeholder="123"
                   required
                 />
               </label>

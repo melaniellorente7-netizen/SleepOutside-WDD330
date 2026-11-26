@@ -30,42 +30,23 @@ form.addEventListener('submit', async (event) => {
     form.reportValidity();
     return;
   }
+
   try {
-    const response = await checkout.checkout(form);
-    console.log('Order submitted:', response);
+    await checkout.checkout(form);
     updateCartCount();
-    alert('Order submitted successfully!');
-    window.location.href = '/';
-  } catch (error) {
-    console.error('Checkout failed:', error);
-    alert('Something went wrong. Please try again.');
+    window.location.href = '/checkout/success.html';
+  } catch (err) {
+    const message = extractErrorMessage(err);
+    alert(message);
   }
 });
 
-/** Enable Mock for quick testing */
-
-/**
-function mockForm() {
-  const data = {
-    fname: 'John',
-    lname: 'Doe',
-    street: '123 Main St',
-    city: 'Anytown',
-    state: 'CA',
-    zip: '12345',
-    cardNumber: '1234123412341234',
-    expiration: '12/28',
-    code: '123',
-  };
-
-  Object.keys(data).forEach((key) => {
-    form.elements[key].value = data[key];
-
-    if (key === 'zip') {
-      form.elements[key].dispatchEvent(new Event('input', { bubbles: true }));
-    }
-  });
+function extractErrorMessage(err) {
+  if (!err) return 'Something went wrong. Please try again.';
+  const body = err.message;
+  if (typeof body === 'string') return body;
+  if (body && typeof body === 'object') {
+    return Object.values(body).join('\n');
+  }
+  return 'Something went wrong. Please try again.';
 }
-
-mockForm();
-*/

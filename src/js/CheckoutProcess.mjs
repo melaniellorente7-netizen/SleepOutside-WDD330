@@ -86,8 +86,13 @@ export default class CheckoutProcess {
         order.shipping = this.shipping;
         order.tax = this.tax.toFixed(2);
 
-        const response = await this.externalServices.checkout(order);
-        setLocalStorage(this.key, []);
-        return response;
+        try {
+            const response = await this.externalServices.checkout(order);
+            setLocalStorage(this.key, []);
+            return response;
+        } catch (err) {
+            console.error('Checkout error:', err);
+            throw err;
+        }
     }
 }
