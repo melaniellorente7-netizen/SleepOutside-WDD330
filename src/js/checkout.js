@@ -1,4 +1,4 @@
-import { loadHeaderFooter, updateCartCount } from './utils.mjs';
+import { loadHeaderFooter, updateCartCount, alertMessage } from './utils.mjs';
 import ExternalServices from './ExternalServices.mjs';
 import CheckoutProcess from './CheckoutProcess.mjs';
 
@@ -37,7 +37,7 @@ form.addEventListener('submit', async (event) => {
     window.location.href = '/checkout/success.html';
   } catch (err) {
     const message = extractErrorMessage(err);
-    alert(message);
+    alertMessage(message);
   }
 });
 
@@ -50,3 +50,24 @@ function extractErrorMessage(err) {
   }
   return 'Something went wrong. Please try again.';
 }
+
+function mockForm() {
+  const payload = {
+    fname: "John",
+    lname: "Doe",
+    street: "123 Main",
+    city: "Rexburg",
+    state: "ID",
+    zip: "83440",
+    cardNumber: "1234123412341234",
+    expiration: "08/30",
+    code: "123"
+  }
+
+  Object.keys(payload).forEach(key => form.elements[key].value = payload[key]);
+}
+
+/**
+ * Uncomment mockForm() to do quick testing
+ */
+// mockForm();

@@ -105,3 +105,28 @@ export function calculateTotalProductPrice(products) {
     return accumulated + item.FinalPrice * quantity;
   }, 0);
 }
+
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement('div');
+  alert.classList.add('alert-message');
+  alert.setAttribute('role', 'alert');
+
+  const text = document.createElement('p');
+  text.textContent = message;
+
+  const dismissBtn = document.createElement('button');
+  dismissBtn.type = 'button';
+  dismissBtn.classList.add('alert-dismiss');
+  dismissBtn.setAttribute('aria-label', 'Dismiss alert');
+  dismissBtn.textContent = '×';
+  dismissBtn.addEventListener('click', () => alert.remove());
+
+  alert.append(text, dismissBtn);
+
+  const main = qs('main');
+  (main || document.body).prepend(alert);
+
+  if (scroll) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
