@@ -105,6 +105,19 @@ export async function loadHeaderFooter() {
   }
 }
 
+export function addProductToCart(product, { animate = true } = {}) {
+  const cartItems = getLocalStorage('so-cart') || [];
+  const existing = cartItems.find((item) => item.Id === product.Id);
+
+  if (existing) {
+    existing.Quantity = (existing.Quantity ?? 1) + 1;
+  } else {
+    cartItems.push({ ...product, Quantity: 1 });
+  }
+  setLocalStorage('so-cart', cartItems);
+  updateCartCount(animate);
+}
+
 export function formatPrice(price) {
   return formatter.format(price);
 }
