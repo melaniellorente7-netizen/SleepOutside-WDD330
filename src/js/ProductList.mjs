@@ -9,6 +9,14 @@ function productCardTemplate(product) {
       <h3>${product.Name}</h3>
       <p class="product-card__price">$${product.FinalPrice}</p>
     </a>
+    <button
+      type="button"
+      class="quick-view-btn"
+      data-id="${product.Id}"
+      aria-label="Quick view: ${product.Name}"
+    >
+      Quick View
+    </button>
   </li>`;
 }
 

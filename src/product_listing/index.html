@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/css/style.css" />
     <script src="../js/product-listing.js" type="module"></script>
   </head>
-
   <body>
     <header id="main-header" class="divider"></header>
     <main class="divider">
@@ -17,5 +16,17 @@
       </section>
     </main>
     <footer id="main-footer"></footer>
+
+    <dialog id="quick-view-modal" class="quick-view-modal" aria-labelledby="qv-title">
+      <button
+        type="button"
+        class="quick-view-close"
+        aria-label="Close quick view"
+      >
+        x
+      </button>
+      <div class="quick-view-body"></div>
+      <button type="button" class="quick-view-add" hidden>Add to Cart</button>
+    </dialog>
   </body>
 </html>

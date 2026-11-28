@@ -537,3 +537,162 @@ a[role='button'].checkout-button {
     animation: none;
   }
 }
+
+/* Quick View button on product cards */
+.product-card {
+  position: relative;
+}
+
+.quick-view-btn {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  margin: 0;
+  padding: 0.35rem 0.75rem;
+  font-size: var(--small-font);
+  background-color: var(--dark-grey);
+  color: white;
+  opacity: 0;
+  transform: translateY(0.25rem);
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out,
+    background-color 0.15s ease-out;
+}
+
+.product-card:hover .quick-view-btn,
+.product-card:focus-within .quick-view-btn,
+.quick-view-btn:focus-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quick-view-btn:hover {
+  background-color: var(--tertiary-color);
+}
+
+@media (hover: none) {
+  .quick-view-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Quick View modal */
+.quick-view-modal {
+  width: min(100%, 44rem);
+  max-height: 90vh;
+  padding: 2rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background-color: white;
+  color: var(--dark-grey);
+  box-shadow: 0 0.625rem 1.875rem rgba(48, 48, 48, 0.25);
+  overflow: auto;
+  margin: auto;
+}
+
+.quick-view-modal::backdrop {
+  background-color: rgba(48, 48, 48, 0.6);
+  backdrop-filter: blur(0.125rem);
+}
+
+.quick-view-modal[open] {
+  animation: quick-view-fade-in 0.2s ease-out;
+}
+
+@keyframes quick-view-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.quick-view-close {
+  all: unset;
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  color: var(--dark-grey);
+  opacity: 0.6;
+  transition: opacity 0.15s ease-out;
+}
+
+.quick-view-close:hover,
+.quick-view-close:focus-visible {
+  opacity: 1;
+}
+
+.quick-view-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .quick-view-body {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.quick-view-image {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: contain;
+  background-color: var(--light-grey);
+}
+
+.quick-view-info h2 {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  margin: 0 0 0.25rem;
+}
+
+.quick-view-info h3 {
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin: 0 0 0.75rem;
+}
+
+.quick-view-price {
+  font-size: var(--large-font);
+  font-weight: bold;
+  color: var(--secondary-color);
+  margin: 0 0 0.5rem;
+}
+
+.quick-view-color {
+  margin: 0 0 1rem;
+  font-size: var(--small-font);
+}
+
+.quick-view-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.quick-view-description a {
+  color: var(--tertiary-color);
+}
+
+.quick-view-add {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.quick-view-status {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--dark-grey);
+  opacity: 0.7;
+}
